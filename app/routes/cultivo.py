@@ -21,7 +21,7 @@ cul = APIRouter()
     summary="Listar todos los cultivos",
     tags=["cultivos"]
     )
-def get_personal():
+def get_cultivo():
     """
     Lis todos los cultivos
     """
