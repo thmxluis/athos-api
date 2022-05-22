@@ -8,6 +8,7 @@ from fastapi.middleware.cors import CORSMiddleware
 
 # APP
 from app.routes.personal import per
+from app.routes.cultivo import cul
 
 
 app = FastAPI(
@@ -17,3 +18,4 @@ app = FastAPI(
 )
 
 app.include_router(per)
+app.include_router(cul)
