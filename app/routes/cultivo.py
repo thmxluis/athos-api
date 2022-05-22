@@ -3,7 +3,7 @@ from typing import List
 
 # FastAPI
 from fastapi import APIRouter
-from fastapi import status
+from fastapi import status, HTTPException
 
 # APP
 from app.models.cultivo import cultivo
@@ -25,7 +25,11 @@ def get_cultivo():
     """
     Lis todos los cultivos
     """
-    return conn.execute(cultivo.select()).fetchall()
+    query = conn.execute(cultivo.select()).fetchall()
+    if query:
+        return query
+    else:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="No hay cultivos")
 
 
 ## Mostrar Cultivo por nom_cultivo
@@ -40,7 +44,11 @@ def get_cultivo_by_nom_cultivo(nom_cultivo: str):
     """
     Lista el cultivo por nom_cultivo
     """
-    return conn.execute(cultivo.select().where(cultivo.c.nom_cultivo == nom_cultivo)).fetchone()
+    query = conn.execute(cultivo.select().where(cultivo.c.nom_cultivo == nom_cultivo)).fetchone()
+    if query:
+        return query
+    else:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Cultivo no encontrado")
 
 
 

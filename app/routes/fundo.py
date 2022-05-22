@@ -3,7 +3,7 @@ from typing import List
 
 # FastAPI
 from fastapi import APIRouter
-from fastapi import status
+from fastapi import status, HTTPException
 
 # APP
 from app.models.fundo import fundo
@@ -25,7 +25,11 @@ def get_fundo():
     """
     Listar todos los fundos
     """
-    return conn.execute(fundo.select()).fetchall()
+    query = conn.execute(fundo.select()).fetchall()
+    if query:
+        return query
+    else:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="No hay fundos")
 
 
 ## Mostrar fundo por nom_fundo
@@ -40,7 +44,13 @@ def get_fundo_by_nom_fundo(nom_fundo: str):
     """
     Lista el fundo por nom_fundo
     """
-    return conn.execute(fundo.select().where(fundo.c.nom_fundo == nom_fundo)).fetchone()
+    query = conn.execute(fundo.select().where(fundo.c.nom_fundo == nom_fundo)).fetchone()
+
+    if query:
+        return query
+    else:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Fundo no encontrado")
+
 
 
 

@@ -3,7 +3,7 @@ from typing import List
 
 # FastAPI
 from fastapi import APIRouter
-from fastapi import status
+from fastapi import status, HTTPException
 
 # APP
 from app.models.personal import personal
@@ -25,7 +25,11 @@ def get_personal():
     """
     Lis todo el personal, solo el Nro_Doc
     """
-    return conn.execute(personal.select()).fetchall()
+    query = conn.execute(personal.select()).fetchall()
+    if query:
+        return query
+    else:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="No hay personal")
 
 
 ## Listar Personal por Nro_Doc
@@ -40,7 +44,11 @@ def get_personal_by_Nro_Doc(Nro_Doc: str):
     """
     Lista el personal por Nro_Doc con su nombr y apellidos.
     """
-    return conn.execute(personal.select().where(personal.c.Nro_Doc == Nro_Doc)).fetchone()
+    query = conn.execute(personal.select().where(personal.c.Nro_Doc == Nro_Doc)).fetchone()
+    if query:
+        return query
+    else:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Personal no encontrado")
 
 
 
