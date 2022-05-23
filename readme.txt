@@ -11,9 +11,10 @@ py -m venv venv
 ### Instalmos las dependencias
 pip install -r requirements.txt
 
-### Instalamos el servidor
-uvicorn main:app --reload
+### Instalamos el servidor 
+# le cambiamos el puerto por defecto de 8000 a 8001
+uvicorn main:app --port 8001 --reload
 
 ### Docs
 http://localhost:8001/docs#/
-http://localhost:8000/redoc#/
+http://localhost:8001/redoc#/
