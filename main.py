@@ -12,7 +12,8 @@ from app.routes.app_test import t
 app = FastAPI(
     title="Athos API",
     description="a REST API using python and mysql",
-    version="0.0.1"
+    version="0.0.1",
+    port=8001,
 )
 
 ## CORS
