@@ -6,6 +6,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from app.routes.personal import per
 from app.routes.cultivo import cul
 from app.routes.fundo import fun
+from app.routes.app_test import t
 
 ## Aplicacion
 app = FastAPI(
@@ -27,3 +28,4 @@ cors = CORSMiddleware(
 app.include_router(per)
 app.include_router(cul)
 app.include_router(fun)
+app.include_router(t)

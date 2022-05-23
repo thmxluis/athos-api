@@ -8,6 +8,8 @@ from pydantic import BaseModel
 class FundoBase(BaseModel):
     id: int
     nom_fundo: str
+    class Config:
+        orm_mode = True
 
 # Mostrar Solo el nom_Fundo 
 class Fundo(FundoBase):

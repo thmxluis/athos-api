@@ -7,6 +7,8 @@ from pydantic import BaseModel
 # Base Personal List
 class PersonalBase(BaseModel):
     Nro_Doc: str
+    class Config:
+        orm_mode = True
 
 # Mostrar Solo el Nro_Doc 
 class Personal(PersonalBase):

@@ -8,6 +8,8 @@ from pydantic import BaseModel
 class CultivoBase(BaseModel):
     id: int
     nom_cultivo: str
+    class Config:
+        orm_mode = True
 
 # Mostrar Solo el nom_cultivo 
 class Cultivo(CultivoBase):
